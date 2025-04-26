@@ -1144,8 +1144,8 @@
                 <!-- Project 1 -->
                 <div class="project-card" data-video="video1.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video1.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video1.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">SmartScan Shopping Assistant</h3>
@@ -1158,8 +1158,8 @@
                 <!-- Project 2 -->
                 <div class="project-card" data-video="video2.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video2.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video2.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">ExpiryGuard – Expired Product Management</h3>
@@ -1172,8 +1172,8 @@
                 <!-- Project 3 -->
                 <div class="project-card" data-video="video3.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video3.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video3.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">SmartFridge Monitor – IoT Tracking</h3>
@@ -1186,8 +1186,8 @@
                 <!-- Project 4 -->
                 <div class="project-card" data-video="video4.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video4.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video4.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">TravelBuddy – Ridesharing Platform</h3>
@@ -1200,8 +1200,8 @@
                 <!-- Project 5 -->
                 <div class="project-card" data-video="video5.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video5.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video5.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">MediConnect – Smart Hospital System</h3>
@@ -1214,8 +1214,8 @@
                 <!-- Project 6 -->
                 <div class="project-card" data-video="video6.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video6.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video6.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">Keto and Kote Restaurant Website</h3>
@@ -1228,8 +1228,8 @@
                 <!-- Project 7 -->
                 <div class="project-card" data-video="video7.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video7.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video7.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">Gesture Art Gallery</h3>
@@ -1242,8 +1242,8 @@
                 <!-- Project 8 -->
                 <div class="project-card" data-video="video8.mp4">
                     <div class="project-video-container">
-                        <video muted autoplay loop playsinline>
-                            <source src="video8.mp4" type="video/mp4">
+                        <video muted autoplay loop playsinline preload="none">
+                            <source data-src="video8.mp4" type="video/mp4">
                         </video>
                         <div class="project-overlay">
                             <h3 class="project-title">RoyaleWalls – Luxury Wallpaper Website</h3>
@@ -1480,6 +1480,44 @@
 
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const videos = document.querySelectorAll("video");
+
+  const loadVideo = (video) => {
+    const source = video.querySelector("source");
+    if (source && source.dataset.src) {
+      source.src = source.dataset.src;
+      video.load();
+    }
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        loadVideo(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  videos.forEach(video => observer.observe(video));
+
+  
+  window.addEventListener('scroll', () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+      videos.forEach(video => {
+        const source = video.querySelector("source");
+        if (source && !source.src) {
+          loadVideo(video);
+        }
+      });
+    }
+  });
+});
+</script>
+
     </script>
 </body>
 </html>
