@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
       /* Base Variables */
 :root {
@@ -764,6 +765,115 @@ body {
     transform: scale(1.05);
 }
 
+/* Icon-based project cards */
+.project-icon-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+}
+
+.project-icon-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    backdrop-filter: blur(15px);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    transition: var(--transition-normal);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.project-icon {
+    font-size: 3rem;
+    color: white;
+    transition: var(--transition-normal);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-weight: 900;
+}
+
+.project-card:hover .project-icon-bg {
+    transform: scale(1.15);
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover .project-icon {
+    transform: scale(1.1);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.2) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-6);
+    opacity: 0;
+    transition: var(--transition-normal);
+    color: white;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-title {
+    color: white;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    line-height: 1.3;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    font-family: var(--font-family);
+}
+
+.project-description {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    font-weight: 400;
+}
+
+.visit-website, .watch-video {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--color-primary);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--border-radius-full);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-4);
+    display: inline-block;
+    transition: var(--transition-fast);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    font-family: var(--font-family);
+}
+
+.visit-website:hover, .watch-video:hover {
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    border-color: white;
+}
+
 .project-overlay {
     position: absolute;
     top: 0;
@@ -783,6 +893,38 @@ body {
     opacity: 1;
 }
 
+/* Project overlay icons for video projects */
+.project-icon-overlay {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition-normal);
+}
+
+.project-icon-overlay i {
+    color: white;
+    font-size: 1.5rem;
+    transition: var(--transition-normal);
+}
+
+.project-card:hover .project-icon-overlay {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.project-card:hover .project-icon-overlay i {
+    transform: scale(1.1);
+}
+
 .project-title {
     color: white;
     font-size: var(--font-size-xl);
@@ -793,38 +935,6 @@ body {
 .project-description {
     color: rgba(255, 255, 255, 0.8);
     font-size: var(--font-size-sm);
-}
-
-.project-play {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    width: 70px;
-    height: 70px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: var(--transition-normal);
-}
-
-.project-play::before {
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 12px 0 12px 20px;
-    border-color: transparent transparent transparent white;
-    margin-left: 5px;
-}
-
-.project-card:hover .project-play {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
 }
 
 /* Modal */
@@ -1145,115 +1255,171 @@ body {
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card" data-video="video1.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video1.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 1: SmartScan -->
+                <div class="project-card" data-video="https://youtu.be/fBGBT2hwXVY">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-qrcode project-icon"></i>
+                        </div>
                         <div class="project-overlay">
                             <h3 class="project-title">SmartScan Shopping Assistant</h3>
-                            <p class="project-description">Scan barcodes for prices, discounts, dietary info, company background, and images. Explore products by categories for easier shopping.</p>
+                            <p class="project-description">Innovative shopping assistant that enhances the in-store experience. Scan barcodes to access price, discounts, dietary information, company details, and product images.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
                     </div>
                 </div>
                 
-                <!-- Project 2 -->
-                <div class="project-card" data-video="video2.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video2.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 2: ExpiryGuard -->
+                <div class="project-card" data-video="https://youtu.be/A7BKzGWBqqo">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-calendar-times project-icon"></i>
+                        </div>
                         <div class="project-overlay">
-                            <h3 class="project-title">ExpiryGuard – Expired Product Management</h3>
-                            <p class="project-description">Track and remove expired goods. Cron-based automated email alerts for store managers.</p>
+                            <h3 class="project-title">ExpiryGuard – Automated Expired Product Management</h3>
+                            <p class="project-description">Smart inventory management system helping stores efficiently track and remove expired products. Features automated email notifications using cron jobs.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
                     </div>
                 </div>
                 
-                <!-- Project 3 -->
-                <div class="project-card" data-video="video3.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video3.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 3: SmartFridge -->
+                <div class="project-card" data-video="https://youtu.be/r42o5dsCA1A">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-thermometer-half project-icon"></i>
+                        </div>
                         <div class="project-overlay">
-                            <h3 class="project-title">SmartFridge Monitor – IoT Tracking</h3>
-                            <p class="project-description">Live monitor temperature and humidity using ESP32 and DHT11. Receive instant alerts if conditions change.</p>
+                            <h3 class="project-title">SmartFridge Monitor – IoT Temperature & Humidity Tracking</h3>
+                            <p class="project-description">IoT-powered web application for businesses with refrigerated storage. Built with ESP32 and DHT11 sensors for real-time monitoring.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
                     </div>
                 </div>
                 
-                <!-- Project 4 -->
-                <div class="project-card" data-video="video4.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video4.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 4: TravelBuddy -->
+                <div class="project-card" data-video="https://youtu.be/7CYDQiar5Gk">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-route project-icon"></i>
+                        </div>
                         <div class="project-overlay">
-                            <h3 class="project-title">TravelBuddy – Ridesharing Platform</h3>
-                            <p class="project-description">Post trip info, find free rides with drivers. Social and sustainable hitchhiking.</p>
+                            <h3 class="project-title">TravelBuddy – Auto-Hitchhiking & Ridesharing App</h3>
+                            <p class="project-description">Smart hitchhiking platform connecting travelers heading in the same direction. Features Google/Facebook registration and trip posting.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
                     </div>
                 </div>
                 
-                <!-- Project 5 -->
-                <div class="project-card" data-video="video5.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video5.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 5: MediConnect -->
+                <div class="project-card" data-video="https://youtu.be/36Qg6rAGI38">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-stethoscope project-icon"></i>
+                        </div>
                         <div class="project-overlay">
-                            <h3 class="project-title">MediConnect – Smart Hospital System</h3>
-                            <p class="project-description">Search doctors, book real-time appointments. AI chatbot for health questions, document uploads, hospital map, profile management.</p>
+                            <h3 class="project-title">MediConnect – Smart Hospital & Appointment Management</h3>
+                            <p class="project-description">Comprehensive hospital management platform streamlining healthcare access. Features doctor search, real-time appointments, and AI health assistant.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
                     </div>
                 </div>
                 
-                <!-- Project 6 -->
-                <div class="project-card" data-video="video6.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video6.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 6: Keto and Kote -->
+                <div class="project-card" data-video="https://youtu.be/SRnhe0CDKfA">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-utensils project-icon"></i>
+                        </div>
                         <div class="project-overlay">
                             <h3 class="project-title">Keto and Kote Restaurant Website</h3>
-                            <p class="project-description">Interactive menu with filters (e.g., keto meals). Restaurant location, recipes, news, vacancies, and direct messaging with staff.</p>
+                            <p class="project-description">Engaging restaurant website offering seamless customer experience. Features interactive menu with dietary filters and staff messaging system.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
                     </div>
                 </div>
                 
-                <!-- Project 7 -->
-                <div class="project-card" data-video="video7.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video7.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 7: Gesture Art Gallery -->
+                <div class="project-card" data-video="https://youtu.be/AaPJJ2UCM-c">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-hand-paper project-icon"></i>
+                        </div>
                         <div class="project-overlay">
                             <h3 class="project-title">Gesture Art Gallery</h3>
-                            <p class="project-description">Control gallery browsing using hand gestures. Move, zoom, and read details without touching the computer (OpenCV + MediaPipe).</p>
+                            <p class="project-description">Futuristic art gallery controlled entirely by hand movements. Built with Python, OpenCV, and MediaPipe for gesture recognition.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
                     </div>
                 </div>
                 
-                <!-- Project 8 -->
-                <div class="project-card" data-video="video8.mp4">
-                    <div class="project-video-container">
-                        <video muted autoplay loop playsinline preload="none">
-                            <source data-src="video8.mp4" type="video/mp4">
-                        </video>
+                <!-- Project 8: RoyaleWalls -->
+                <div class="project-card" data-video="https://youtu.be/j8qXwUejVwE">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-paint-roller project-icon"></i>
+                        </div>
                         <div class="project-overlay">
                             <h3 class="project-title">RoyaleWalls – Luxury Wallpaper Website</h3>
-                            <p class="project-description">Explore curated wallpaper collections by brand, room, color, and wallpaper type. Premium and elegant interior designs.</p>
+                            <p class="project-description">Luxury wallpaper website redefining elegance in interior design. Explore curated collections with advanced filters for premium experience.</p>
+                            <div class="watch-video">Watch Video</div>
                         </div>
-                        <div class="project-play"></div>
+                    </div>
+                </div>
+                
+                <!-- Project 9: AutoCargo -->
+                <div class="project-card" data-website="https://play.google.com/store/apps/details?id=dev.chiko.sarke">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-truck project-icon"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="project-title">AutoCargo – Vehicle Delivery Management App</h3>
+                            <p class="project-description">Cross-platform vehicle delivery solution for iOS & Android. Features separate apps for customers, drivers, and admin panel for complete order management.</p>
+                            <div class="visit-website">Visit Website</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 10: Lemanor Lodge -->
+                <div class="project-card" data-website="https://lemanor.net/">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-home project-icon"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="project-title">Lemanor Lodge – Official Website</h3>
+                            <p class="project-description">Official website for Lemanor Lodge, featuring elegant design showcasing accommodation options, amenities, and booking system.</p>
+                            <div class="visit-website">Visit Website</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 11: Rydr Taxi -->
+                <div class="project-card" data-website="https://rydr.site/">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-taxi project-icon"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="project-title">Rydr Taxi Application – Official Website</h3>
+                            <p class="project-description">Official landing page for Rydr taxi application, featuring app promotion, driver registration, and service information.</p>
+                            <div class="visit-website">Visit Website</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 12: Genofit -->
+                <div class="project-card" data-website="https://genofit.tech/">
+                    <div class="project-icon-container">
+                        <div class="project-icon-bg">
+                            <i class="fas fa-flask project-icon"></i>
+                        </div>
+                        <div class="project-overlay">
+                            <h3 class="project-title">Genofit – QA Testing Company Official Website</h3>
+                            <p class="project-description">Professional corporate website for Genofit QA testing company. Features service offerings, team information, and testing methodologies.</p>
+                            <div class="visit-website">Visit Website</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1391,18 +1557,34 @@ body {
         // Project Video Modal
         function openVideoModal(e) {
             const videoSrc = this.getAttribute('data-video');
+            const websiteUrl = this.getAttribute('data-website');
             
-            modalVideo.src = videoSrc;
-            videoModal.style.display = 'flex';
+            // If it's a website project, open the website
+            if (websiteUrl) {
+                window.open(websiteUrl, '_blank');
+                return;
+            }
             
-            setTimeout(() => {
-                videoModal.classList.add('active');
-            }, 10);
+            // If it's a YouTube link, open YouTube
+            if (videoSrc && (videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be'))) {
+                window.open(videoSrc, '_blank');
+                return;
+            }
             
-            modalVideo.volume = 1;
-            modalVideo.play();
-            
-            body.style.overflow = 'hidden';
+            // Otherwise, handle local video files
+            if (videoSrc) {
+                modalVideo.src = videoSrc;
+                videoModal.style.display = 'flex';
+                
+                setTimeout(() => {
+                    videoModal.classList.add('active');
+                }, 10);
+                
+                modalVideo.volume = 1;
+                modalVideo.play();
+                
+                body.style.overflow = 'hidden';
+            }
         }
 
         function closeVideoModal() {
